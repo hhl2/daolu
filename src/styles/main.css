@@ -1,0 +1,376 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body,html{
+    width: 100%;
+    overflow-x: hidden; 
+    
+}
+a{
+    color: #fff;
+    text-decoration: none;;
+}
+
+.top_box{
+    position: fixed;
+    top: 50px;
+    right: 30px;
+    height: 35px;
+    z-index: 35;
+    display: flex;
+}
+.top_box_btn{
+    margin-right: 50px;
+    width: 100px;
+    background: url('@/assets/ai_bg.png') no-repeat;
+    text-align: center;
+    color: #fff;
+    line-height: 35px;
+    cursor: pointer;
+}
+.menu_box{
+    position: fixed;
+    bottom: 30px;
+    z-index: 32;
+    width: 58%;
+    background: url('@/assets/menu_bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 70px;
+}
+.menu_box ul{list-style: none;display: flex;height: 100%;align-items: center;}
+.menu_box ul li{flex: 1;font-size: 22px;font-weight: bold;color: #fff;text-align: center;height: 100%;line-height: 60px;}
+
+.left{
+    width: 350px;
+    min-height: 80%;
+    position: absolute;
+    z-index: 31;
+    background:url('@/assets/bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    left: 20px;
+    top: 70px;
+    padding: 20px 10px;
+}
+
+.right{
+    width: 350px;
+    min-height:80%;
+    position: absolute;
+    z-index: 31;
+    background:url('@/assets/bg.png') no-repeat right top;
+    background-size: 100% 100%;
+    right: 20px;
+    top: 70px;
+    padding: 20px 10px;
+}
+
+.title{
+    color: #fff;
+    background: url('@/assets/title_bg.png') no-repeat 0 0;
+    height: 40px;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* .top_box .active{
+    background: url('@/assets/menu_active.png') no-repeat 0 0;
+    background-size: cover;
+} */
+
+
+.menu_box li {
+    position: relative;
+    cursor: pointer;
+}
+.menu_box li a{
+    padding: 0 20px;
+    display: block;
+}
+
+.menu_box ul li>ul.sub-menu {
+    position: fixed;
+    top: -50px;
+    /*left: 0;
+     background: #fff; */
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    display: none;
+    min-width: 160px;
+    /*width: 100%;*/
+}
+.menu_box ul li>ul li{
+    float: left;
+    background: url('@/assets/menu_child_bg.png') no-repeat 0 0;
+    background-size: cover;
+    font-size: 16px !important;
+    height: 34px;
+    line-height: 34px;
+    /*padding: 0 20px;*/
+    margin-right: 20px;
+}
+.menu_box ul li>ul.sub-menu.show {
+display: block;
+animation: slideDown 0.3s;
+}
+.menu_box ul li.has_sub{
+    background:url('@/assets/menu_active.png') no-repeat center 0;
+}
+
+.menu_box ul li>ul.sub-menu li.active{
+    background:url('@/assets/menu_active.png'),url('@/assets/menu_child_bg.png');
+    background-position: center 0, center 0;
+    background-repeat: no-repeat;
+    background-size: cover, cover;
+}
+
+@keyframes slideDown {
+from { opacity: 0; transform: translateY(-10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+
+.roadlist_box{
+    position: fixed;
+    width: 960px;
+    height: 595px;
+    z-index: 32;
+    background: url('@/assets/window_bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding-top: 20px;
+}
+.roadlist_table{
+    padding: 20px;
+}
+
+.roadlist_table .search-box{
+    display: flex;
+    align-content: space-between;
+    margin-bottom: 20px;
+}
+
+.roadlist_table .el-table .cell{
+    font-size: 12px;
+}
+
+.roadlist_table .search-box .el-input__wrapper{
+    background: url('@/assets/search_bg.png') no-repeat 0 0;
+    background-size: cover;
+    padding-left: 25px;
+    box-shadow:none;
+}
+.roadlist_table .search-box .el-input__inner{
+    color: #fff;
+}
+.roadlist_table .search-box .el-button{
+    background-color: #0e2650;
+}
+
+.road_tab{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.road_tab .el-tabs__item{
+    color:#fff;
+}
+
+.road_tab .el-tabs__content{
+    padding: 0px !important;
+}
+.road_tab .roadlist_table{padding: 0;}
+
+ #playerUI #controls,#connection{display: none;} 
+
+.info_box .el-descriptions__label{min-width: 100px;display: inline-block;color: #fff !important;}
+.info_box .el-descriptions__body{background: transparent;}
+.info_box .el-descriptions__content,.info_box .el-descriptions__content a{color: #76ccfe !important;}
+.info_box tr td{background: rgba(255,255,255,0.3);margin-bottom: 15px;border-bottom: solid 10px rgba(0,0,0,0.4);padding: 5px 20px !important;}
+
+/* 强制导航容器右对齐 */
+.el-tabs__header{
+    justify-content: end !important;
+}
+.el-tabs__nav-wrap {
+    flex:0 auto !important;
+  }
+
+.tc_box{
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.tc_left{color:#fff;font-weight: bold;font-style: italic;}
+.tc_right{color: #fff;}
+
+.xm_title{position: fixed;top: 0;z-index: 32;left: 50%;transform: translateX(-50%);}
+.xm_date{position: fixed;right: 40px;color:#fff;z-index: 33;top: 15px;font-size: 20px;}
+
+.roadlist_position{width: 750px;top: 50%;left: auto;transform: translateY(-50%);right: 420px !important;height: 500px;}
+.footer_dev{position: fixed;bottom: 15px;right: 60px;z-index: 33;color: #fff;font-weight: bold;}
+
+
+/* 去除默认背景色、悬停背景及斑马纹 */
+.el-table {
+    --el-table-bg-color: transparent !important;       /* 表格整体背景 */
+    --el-table-tr-bg-color: transparent !important;     /* 普通行背景 */
+    --el-table-row-hover-bg-color: transparent !important; /* 悬停背景 */
+    --el-table-border:none;
+  }
+  
+/* 去除表格顶部外边框 */
+.el-table::before { width: 0 !important; }
+.el-table--border:after{ width: 0 !important; }
+.el-table__inner-wrapper:before{height: 0 !important;}
+/* 去除表格底部外边框 */
+.el-table__inner-wrapper::after { height: 0 !important; }
+/* 隐藏右侧边框补丁 */
+.el-table__border-left-patch { background: transparent !important; }
+.el-table thead tr{background: url('@/assets/table_th.png');color: #fff;}
+.el-table th.el-table__cell{background-color:transparent !important;border-right: none;border-bottom: none;}
+.el-table .cell{text-align: center;}
+/* 隐藏所有单元格边框 */
+.el-table--border .el-table__cell { border: none !important; }
+
+.el-table tbody>tr:nth-child(odd){background-color: rgba(255,255,255,0.2);}
+.el-table tbody>tr:nth-child(even){background-color: rgba(75,140,173,0.2);}
+.el-table tbody>tr td{background-color: transparent; color: #fff;}
+
+/* 分页 */
+.el-pagination{justify-content: end;}
+.el-pagination__sizes, .el-pagination__total{color: #bbbaba !important;}
+.el-pagination__jump{display: none !important;}
+.el-pagination .el-select{display: none !important;}
+
+.swiper_box{background: rgba(136, 211, 255, 0.3);max-height:180px;padding: 10px 10px;overflow: hidden;}
+.swiper_box img{height: 180px;}
+.swiper-slide{text-align: center;}
+
+
+.process_position{
+    width: 670px;
+    height: 425px;
+    background: url('@/assets/window_bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    padding-top: 20px;
+}
+.process_chart_position{
+    height: 260px;
+    background: url('@/assets/window_bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    padding-top: 20px;
+    width: 400px;
+    
+}
+
+.process_lc_position{
+    height: 180px;
+    background: url('@/assets/window_bg.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    padding-top: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.process_box{
+    position: fixed;
+    z-index: 32;
+    left:50%;
+    top:30%;
+    transform: translate(-50%,-30%);
+    display: flex;
+    flex-direction: column; /* 设置为垂直布局 */
+    
+    
+}
+.process_box_top{
+    display: flex;
+    align-items: end;
+}
+
+.process_lc{display: flex;padding: 10px;align-items: center;margin-top: 15px;}
+.process_lc_text{cursor: pointer;display: flex;color: #fff;align-items: center;border:solid 1px #06c5c6;background-color: #112945;flex:1;}
+.process_lct_title{
+    writing-mode: vertical-rl; /* 或者使用 vertical-lr，根据你的需求选择 */
+    font-size: 20px;
+    padding: 10px;
+}
+.process_lct_content{
+    background-color: rgba(2,69,141,0.8);
+    padding: 10px;
+    font-size: 14px;
+    flex: 1;
+}
+.process_lct_content p{margin-bottom: 4px;}
+
+.yy_box{
+    width: 350px;top: 50%;left: auto;transform: translateY(-50%);right: 420px !important;height: 400px;
+}
+.yy_table{padding: 20px;}
+
+.yy_table tr:nth-child(odd) td{background: rgba(75,140,173,0.5);}
+
+
+.serach_b{display: flex;justify-content:space-between;}
+.roadsituation{font-size: 12px;}
+.roadsituation .swiper_box{background: transparent;}
+.roadsituation .swiper_box .swiper-slide{cursor: pointer;}
+
+.el-dialog{background: rgba(0,0,0,0.7);margin: 0;width: 100% !important;height: 100%;overflow: hidden;display: flex;align-items: center;justify-content: center;}
+.el-dialog__headerbtn .el-dialog__close{font-size: 18px;margin-top: 10px;}
+
+
+.el-descriptions__table tbody>tr td{background: transparent;}
+.el-descriptions__table tbody>tr:nth-child(odd){background-color: rgba(255,255,255,0.2);}
+.el-descriptions__table tbody>tr:nth-child(even){background-color: rgba(75,140,173,0.2);}
+
+/* 红色警告样式 */
+.risk-level-1{ 
+  color: #ff0000;
+}
+
+/* 橙色提示样式 */
+.risk-level-2{
+  color: #ffc000;
+}
+
+/* 黄色提示样式 */
+.risk-level-3{
+  color: #ffff00;
+}
+
+/* 蓝色常规样式 */
+.risk-level-4 {
+  color: #00b0f0;
+}
+
+.el-table__column-filter-trigger i{color:transparent;}
+
+
+/* 替换筛选按钮图标 */
+.el-table__column-filter-trigger i {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('@/assets/xl.png') no-repeat center;
+  background-size: contain;
+  font-family: "iconfont"!important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.roadlist_box .el-tabs__header{
+    position: absolute;
+    z-index: 999;
+    right: 30px;
+    top: 50px;
+  }
+  .roadlist_box .el-tabs__content{
+    margin-top:20px;
+  }
+  .sb{display: flex;justify-content: end;margin-top: -20px;}
