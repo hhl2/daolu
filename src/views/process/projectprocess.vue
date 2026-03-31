@@ -113,7 +113,7 @@
                          v-model:current-page="currentPage"
                          v-model:page-size="pageSize"
                          small
-                         :pager-count="4"
+                         :pager-count="5"
                          :page-sizes="[10, 20, 30, 50]"
                          :background="true"
                          layout="total, sizes, prev, pager, next, jumper"
@@ -332,6 +332,13 @@ const getTongji1 = ()=>{
   var disease_type_chart = echarts.init(disease_type.value);
   get_disease_type({projectId: projectInfo.value.id}).then(res => {
     console.log('病害数量:', res)
+    // 病害类型排序：空洞(红) → 脱空(橙) → 疏松体(黄)，危害由重到轻
+    const typeOrder = ['空洞', '脱空', '疏松体'];
+    const typeColorMap = {
+      '空洞': '#ff0000',
+      '脱空': '#ffc000',
+      '疏松体': '#ffff00'
+    };
     const series = res.result.reduce((acc, item) => {
       const name = item['countName'];
       const value = parseInt(item['countNums']); // 转换为数值
@@ -343,15 +350,27 @@ const getTongji1 = ()=>{
         if (existing) {
           existing.value += value;
         } else {
-          acc.push({name: '疏松体', value});
+          acc.push({
+            name: '疏松体', 
+            value,
+            itemStyle: { color: typeColorMap['疏松体'] }
+          });
         }
       } else {
         // 其他分类直接添加
-        acc.push({name, value});
+        acc.push({
+          name, 
+          value,
+          itemStyle: { color: typeColorMap[name] || undefined }
+        });
       }
 
       return acc;
-    }, []);
+    }, []).sort((a, b) => {
+      const ai = typeOrder.indexOf(a.name);
+      const bi = typeOrder.indexOf(b.name);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    });
     console.log('病害数量总数', res.result.reduce((a, b) => a + b.countNums, 0))
      const disease_type_option = {
       tooltip: {
@@ -419,7 +438,7 @@ const getTongji1 = ()=>{
         //data:['B1','F1','F2']
       },
 
-      color: ['#ffff00', '#00b0f0', '#ff0000', '#ffc000',],
+      // color: ['#ffff00', '#00b0f0', '#ff0000', '#ffc000',],
       series: [
         {
           name: '',

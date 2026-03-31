@@ -1,7 +1,12 @@
 <template>
   <div class="roadlist_box">
     <div class="tc_box">
-      <div class="tc_left">传感器在线实时监测平台</div>
+      <div class="tc_left">
+        传感器在线实时监测平台
+        <span style="font-size: 14px; color: #ff4d4f; margin-left: 15px; font-weight: normal; letter-spacing: 1px; padding: 2px 8px; border: 1px solid #ff4d4f; border-radius: 4px; background-color: rgba(255, 77, 79, 0.1); vertical-align: middle;">
+          未接入传感器，仅供演示
+        </span>
+      </div>
       <div class="tc_right">
         <el-icon @click="goToHome">
           <CloseBold/>

@@ -20,7 +20,7 @@ export const get_camera_list = (data) => {
 //获取token
 export const get_token = (data) => {
   return request({
-    url: 'sys/getToken?username=cdu&password=cd-201818',
+    url: 'sys/getToken?username=guangzhouhpq&password=guangzhouhpq999.',
     method: 'get',
     data
   }).catch((error) => {
@@ -37,24 +37,10 @@ export const get_work = (data) => {
   } else {
     data.riskLevel = ''
   }
-<<<<<<< .mine
   console.log('道路列表给UE', '/dljcboot/3d/sysAreaRoad/list?xzq=440112&roadName=*' + data.searchtext + '*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo=' + data.current + '&pageSize=' + data.pagesize);
   // console.log('/dljcboot/3d/sysAreaRoad/list?_t=1745313157&xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize+');
-||||||| .r43
-  console.log('道路列表给UE','/dljcboot/3d/sysAreaRoad/list?xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize);
-  // console.log('/dljcboot/3d/sysAreaRoad/list?_t=1745313157&xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize+');
-=======
-  console.log('道路列表给UE','/dljcboot/3d/sysAreaRoad/list?_t=1745313157&xzq=510100&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize);
-  // console.log('/dljcboot/3d/sysAreaRoad/list?_t=1745313157&xzq=510100&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize+');
->>>>>>> .r45
   return request({
-<<<<<<< .mine
     url: '3d/sysAreaRoad/list?xzq=440112&roadName=' + data.searchtext + '&riskLevel=' + data.riskLevel + '&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
-||||||| .r43
-    url: '3d/sysAreaRoad/list?xzq=440112&roadName='+data.searchtext+'&riskLevel='+data.riskLevel+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
-=======
-    url: '3d/sysAreaRoad/list?xzq=510100&roadName='+data.searchtext+'&riskLevel='+data.riskLevel+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -74,7 +60,7 @@ export const get_work = (data) => {
 export const get_cause = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countBy?countType=reason&xzq=510100&years=&province=510000&city=510100&area=',
+    url: '3d/disastersCount/countBy?countType=reason&xzq=440112&years=&province=510000&city=440112&area=',
     method: 'get',
     data
   })
@@ -84,7 +70,7 @@ export const get_cause = (data) => {
 export const get_trends = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countByYearsBhtattr?xzq=510100&years=&province=510000&city=510100&area=',
+    url: '3d/disastersCount/countByYearsBhtattr?xzq=440112&years=&province=510000&city=440112&area=',
     method: 'get',
     data
   })
@@ -101,13 +87,7 @@ export const get_collpse = (data) => {
     data.roadName = ''
   }
   return request({
-<<<<<<< .mine
     url: 'collapse/dljcCollapse/list?xzq=440112&roadName=' + data.roadName + '&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
-||||||| .r43
-    url: 'collapse/dljcCollapse/list?xzq=440112&roadName='+data.roadName+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
-=======
-    url: 'collapse/dljcCollapse/list?xzq=510100&roadName='+data.roadName+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -133,13 +113,7 @@ export const get_disease = (data) => {
     // 区域
   } else {
     //默认成都
-<<<<<<< .mine
     data.xzq = '440112'
-||||||| .r43
-    data.xzq  = '440112'
-=======
-    data.xzq  = '510100'
->>>>>>> .r45
 
   }
   if (typeof data.riskLevel !== 'undefined' && data.riskLevel !== null) {
@@ -173,15 +147,9 @@ export const get_disease = (data) => {
 
 
   // console.log(data.current);
-<<<<<<< .mine
   console.log('病害列表给UE', 'https://www.roadradar.cn/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&hisCode=' + data.searchtext + '&xzq=440112&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo=' + data.current + '&pageSize=' + data.pagesize);
-||||||| .r43
-   console.log('病害列表给UE','https://www.roadradar.cn/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&hisCode='+data.searchtext+'&xzq=440112&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo='+data.current+'&pageSize='+data.pagesize);
-=======
-   console.log('病害列表给UE','https://www.roadradar.cn/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&hisCode='+data.searchtext+'&xzq=510100&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo='+data.current+'&pageSize='+data.pagesize);
->>>>>>> .r45
   return request({
-    // url: '/dljcboot/disasters/dljcDisastersArchives/list?_t=1745313157&xzq=510100&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize+,
+    // url: '/dljcboot/disasters/dljcDisastersArchives/list?_t=1745313157&xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&pageNo='+data.current+'&pageSize='+data.pagesize+,
     url: 'disasters/dljcDisastersArchives/list?bhtAttrs=' + data.bhtAttrs + '&years=' + data.years + '&disasterCode=' + data.searchtext + '&xzq=' + data.xzq + '&roadName=' + data.roadName + '&riskLevel=' + data.riskLevel + '&disasterType=' + data.disasterType + '&status=' + data.status + '&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
     method: 'get',
     data
@@ -192,13 +160,7 @@ export const get_disease = (data) => {
 export const get_disease_repeat = (data) => {
   // console.log(data.current);
   return request({
-<<<<<<< .mine
     url: 'disasters/dljcDisastersArchives/listsub?disasterCode=' + data.hiscode + '&xzq=440112&column=reportDate&order=asc',
-||||||| .r43
-    url: 'disasters/dljcDisastersArchives/listsub?disasterCode='+data.hiscode+'&xzq=440112&column=reportDate&order=asc',
-=======
-    url: 'disasters/dljcDisastersArchives/listsub?disasterCode='+data.hiscode+'&xzq=510100&column=reportDate&order=asc',
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -214,13 +176,7 @@ export const get_disease_type = (data) => {
     data.projectId = '';
   }
   return request({
-<<<<<<< .mine
     url: '3d/disastersCount/countBy?countType=bhtAttr&xzq=440112&projectId=' + data.projectId,
-||||||| .r43
-    url: '3d/disastersCount/countBy?countType=bhtAttr&xzq=440112&projectId='+data.projectId,
-=======
-    url: '3d/disastersCount/countBy?countType=bhtAttr&xzq=510100&projectId='+data.projectId,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -230,7 +186,7 @@ export const get_disease_type = (data) => {
 export const get_disease_level = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countBy?countType=riskLevelAttr&xzq=510100&roadName=',
+    url: '3d/disastersCount/countBy?countType=riskLevelAttr&xzq=440112&roadName=',
     method: 'get',
     data
   })
@@ -240,7 +196,7 @@ export const get_disease_level = (data) => {
 export const get_road_rank = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countBy?countType=road&xzq=510100&years=',
+    url: '3d/disastersCount/countBy?countType=road&xzq=440112&years=',
     method: 'get',
     data
   })
@@ -250,7 +206,7 @@ export const get_road_rank = (data) => {
 export const get_road_state = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countBy?countType=area&xzq=510100',
+    url: '3d/disastersCount/countBy?countType=area&xzq=440112',
     method: 'get',
     data
   })
@@ -260,7 +216,7 @@ export const get_road_state = (data) => {
 export const get_disease_fixed = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/disastersCount/countBy?countType=status&xzq=510100',
+    url: '3d/disastersCount/countBy?countType=status&xzq=440112',
     method: 'get',
     data
   })
@@ -270,7 +226,7 @@ export const get_disease_fixed = (data) => {
 export const get_road_kilometer = (data) => {
   // console.log(data.current);
   return request({
-    url: '3d/projectCount/countBy?queryYearFrom=2020%2C2021%2C2022%2C2023%2C2024&countType=chedaomilebhtByYears&xzq=510100',
+    url: '3d/projectCount/countBy?queryYearFrom=2020%2C2021%2C2022%2C2023%2C2024&countType=chedaomilebhtByYears&xzq=440112',
     method: 'get',
     data
   })
@@ -280,16 +236,8 @@ export const get_road_kilometer = (data) => {
 export const get_road_yj = (data) => {
   // console.log(data.current);
   return request({
-<<<<<<< .mine
     // url: '/dljcboot/riskforcast/dljcRoadRiskTaskSet/listQuery?_t=1746684853&xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,xzq_dictText,riskLevel_dictText,riskNum,lastCompDay,action&pageNo='+data.current+'&pageSize='+data.pagesize,
     url: '3d/riskforcastCount/listQuery?xzq=440112&roadName=' + data.searchtext + '&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
-||||||| .r43
-    // url: '/dljcboot/riskforcast/dljcRoadRiskTaskSet/listQuery?_t=1746684853&xzq=440112&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,xzq_dictText,riskLevel_dictText,riskNum,lastCompDay,action&pageNo='+data.current+'&pageSize='+data.pagesize,
-    url: '3d/riskforcastCount/listQuery?xzq=440112&roadName='+data.searchtext+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
-=======
-    // url: '/dljcboot/riskforcast/dljcRoadRiskTaskSet/listQuery?_t=1746684853&xzq=510100&roadName=*'+data.searchtext+'*&column=createTime&order=desc&field=id,,,xzq_dictText,riskLevel_dictText,riskNum,lastCompDay,action&pageNo='+data.current+'&pageSize='+data.pagesize,
-    url: '3d/riskforcastCount/listQuery?xzq=510100&roadName='+data.searchtext+'&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -299,13 +247,7 @@ export const get_road_yj = (data) => {
 export const get_road_jcqk = (data) => {
   console.log("get_road_jcqk", data);
   return request({
-<<<<<<< .mine
     url: 'project/dljcSurveyRoad/list?xzq=440112&roadName=' + data.roadName + '&column=updateTime&order=asc&pageNo=' + data.current + '&pageSize=' + data.pageSize,
-||||||| .r43
-    url: 'project/dljcSurveyRoad/list?xzq=440112&roadName='+data.roadName+'&column=updateTime&order=asc&pageNo='+data.current+'&pageSize='+data.pageSize,
-=======
-    url: 'project/dljcSurveyRoad/list?xzq=510100&roadName='+data.roadName+'&column=updateTime&order=asc&pageNo='+data.current+'&pageSize='+data.pageSize,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -313,24 +255,10 @@ export const get_road_jcqk = (data) => {
 
 
 //病害列表给UE
-<<<<<<< .mine
 export const get_disease_ue = (data) => {
   console.log('病害列表给UE', '/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&disasterCode=' + data.searchtext + '&xzq=440112&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo=' + data.current + '&pageSize=' + data.pagesize);
-||||||| .r43
-export const get_disease_ue = (data)=>{
-  console.log('病害列表给UE','/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&disasterCode='+data.searchtext+'&xzq=440112&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo='+data.current+'&pageSize='+data.pagesize );
-=======
-export const get_disease_ue = (data)=>{
-  console.log('病害列表给UE','/dljcboot/disasters/dljcDisastersArchives/listsub?_t=1746771981&disasterCode='+data.searchtext+'&xzq=510100&column=createTime&order=desc&field=id,,,projectId_dictText,taskId_dictText,xzq_dictText,surveyRoadMile,finishMile,surveyDate,surveyLineNum,surveyMile,finishSurveyMile,action&&pageNo='+data.current+'&pageSize='+data.pagesize );
->>>>>>> .r45
   return request({
-<<<<<<< .mine
     url: 'disasters/dljcDisastersArchives/listsub?disasterCode=' + data.searchtext + '&xzq=440112&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
-||||||| .r43
-    url: 'disasters/dljcDisastersArchives/listsub?disasterCode='+data.searchtext+'&xzq=440112&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
-=======
-    url: 'disasters/dljcDisastersArchives/listsub?disasterCode='+data.searchtext+'&xzq=510100&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -340,13 +268,7 @@ export const get_disease_ue = (data)=>{
 export const get_risk = (data) => {
   console.log('风险曲线接口', data.searchtext);
   return request({
-<<<<<<< .mine
     url: '3d/sysAreaRoad/countBy?countType=riskLine&roadName=' + data.searchtext + '&xzq=440112',
-||||||| .r43
-    url: '3d/sysAreaRoad/countBy?countType=riskLine&roadName='+data.searchtext+'&xzq=440112',
-=======
-    url: '3d/sysAreaRoad/countBy?countType=riskLine&roadName='+data.searchtext+'&xzq=510100',
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -363,13 +285,7 @@ export const get_lc = (data) => {
   }
 
   return request({
-<<<<<<< .mine
     url: '3d/disastersCount/bhjclccount?projectId=' + data.projectId + '&roadName=' + data.searchtext + '&xzq=440112',
-||||||| .r43
-    url: '3d/disastersCount/bhjclccount?projectId='+data.projectId+'&roadName='+data.searchtext+'&xzq=440112',
-=======
-    url: '3d/disastersCount/bhjclccount?projectId='+data.projectId+'&roadName='+data.searchtext+'&xzq=510100',
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -379,13 +295,7 @@ export const get_lc = (data) => {
 export const get_jc = (data) => {
   console.log('检测相关信息', data.searchtext);
   return request({
-<<<<<<< .mine
     url: 'project/dljcProject/countProjectByRoad?xzq=440112&roadName=' + data.searchtext + '&column=createTime&order=desc',
-||||||| .r43
-    url: 'project/dljcProject/countProjectByRoad?xzq=440112&roadName='+data.searchtext+'&column=createTime&order=desc',
-=======
-    url: 'project/dljcProject/countProjectByRoad?xzq=510100&roadName='+data.searchtext+'&column=createTime&order=desc',
->>>>>>> .r45
     method: 'get',
     data
   })
@@ -398,7 +308,7 @@ export const get_xiangmu = (data) => {
     data.projectId = ''
   }
   return request({
-    url: 'project/dljcProject/list?xzq=510100&column=updateTime&order=desc',
+    url: 'project/dljcProject/list?xzq=440112&column=updateTime&order=desc',
     method: 'get',
     data
   })
@@ -410,13 +320,7 @@ export const get_xiangmu = (data) => {
  */
 export const get_xiangmu_daolu = (data) => {
   return request({
-<<<<<<< .mine
     url: 'project/dljcSurveyRoad/list?projectId=' + data.projectId + '&xzq=440112&column=updateTime&order=desc&pageNo=' + data.current + '&pageSize=' + data.pagesize,
-||||||| .r43
-    url: 'project/dljcSurveyRoad/list?projectId='+data.projectId+'&xzq=440112&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
-=======
-    url: 'project/dljcSurveyRoad/list?projectId='+data.projectId+'&xzq=510100&column=updateTime&order=desc&pageNo='+data.current+'&pageSize='+data.pagesize,
->>>>>>> .r45
     method: 'get',
     data
   })

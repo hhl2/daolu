@@ -116,16 +116,8 @@ let trackPolyline = null;  // 轨迹折线对象
       const mapContainer = document.querySelector('#mapContainer');
       if (mapContainer && !map) {
         map = new window.BMapGL.Map(mapContainer);
-<<<<<<< .mine
         // 改为广州市黄埔区坐标
         const point = new window.BMapGL.Point(113.459749, 23.106402);
-||||||| .r43
-        const point = new window.BMapGL.Point(113.459749, 23.106402);
-=======
-        // (104.06, 30.70) 成都
-        // (113.459749, 23.106402) 黄浦
-        const point = new window.BMapGL.Point(104.06, 30.70);
->>>>>>> .r45
         map.centerAndZoom(point, 11);
         map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
       }

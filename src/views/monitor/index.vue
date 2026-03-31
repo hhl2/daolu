@@ -14,13 +14,13 @@
         <el-tab-pane label="车辆监控" name="first">
           <MonitorJk/>
         </el-tab-pane>
-        <el-tab-pane label="城市监控" name="second">
+        <el-tab-pane disabled label="城市监控" name="second">
           <MonitorCity/>
         </el-tab-pane>
-        <el-tab-pane label="数据回溯" name="third">
+        <el-tab-pane disabled label="数据回溯" name="third">
           <MonitorHs/>
         </el-tab-pane>
-        <el-tab-pane label="实时巡检" name="four">
+        <el-tab-pane disabled label="实时巡检" name="four">
           <MonitorXj/>
         </el-tab-pane>
       </el-tabs>
@@ -34,6 +34,12 @@
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
+}
+
+/* 强制禁用状态的选项卡文字变灰 */
+.road_tab .el-tabs__item.is-disabled {
+  color: #a8abb2 !important; /* 置灰的颜色 */
+  cursor: not-allowed !important;
 }
 </style>
 

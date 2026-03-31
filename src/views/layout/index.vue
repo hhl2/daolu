@@ -1,6 +1,6 @@
 <template>
   <div class="xm_title">
-    <img src="@/assets/xm_title.png"/>
+    <img src="@/assets/xm_title.png" />
   </div>
   <div class="xm_date">
     {{ formattedDate }} {{ formattedTime }} {{ weekDay }}
@@ -11,23 +11,11 @@
   </div> -->
 
   <div class="kongjian">
-    <VerticalSlider  />
-    <router-link
-        to="/analysis"
-        @click.stop="ue5click(15)"
-    ><img src="@/assets/kongjianfenxi.png"/></router-link>
-    <router-link
-        to="/analysis"
-        @click.stop="ue5click(16)"
-    ><img src="@/assets/daolufenxi.png"/></router-link>
-    <router-link
-        to="/analysis"
-        @click.stop="ue5click(17)"
-    ><img src="@/assets/qingchu.png"/></router-link>
-    <router-link
-        to="/analysis"
-        @click="toggle_box()"
-    ><img src="@/assets/chuangkou.png"/></router-link>
+    <VerticalSlider />
+    <router-link to="/analysis" @click.stop="ue5click(15)"><img src="@/assets/kongjianfenxi.png" /></router-link>
+    <router-link to="/analysis" @click.stop="ue5click(16)"><img src="@/assets/daolufenxi.png" /></router-link>
+    <router-link to="/analysis" @click.stop="ue5click(17)"><img src="@/assets/qingchu.png" /></router-link>
+    <router-link to="/analysis" @click="toggle_box()"><img src="@/assets/chuangkou.png" /></router-link>
   </div>
 
   <div class="footer_dev">开发单位：中科云图科技有限公司</div>
@@ -40,37 +28,18 @@
   <div class="menu_box">
     <ul>
       <!-- 一级菜单 -->
-      <li
-          v-for="(menu, index) in links"
-          :key="index"
-          @click="showSub(index),ue5click(menu.id)"
-          :class="{ 'has_sub': activeSub === index }"
-      >
+      <li v-for="(menu, index) in links" :key="index" @click="showSub(index), ue5click(menu.id)"
+        :class="{ 'has_sub': activeSub === index }">
         <!-- 无子级时使用 router-link 跳转 -->
-        <router-link
-            v-if="!menu.children"
-            :to="menu.path"
-            :class="{ 'active': $route.path === menu.path }"
-        >
+        <router-link v-if="!menu.children" :to="menu.path" :class="{ 'active': $route.path === menu.path }">
           {{ menu.text }}
         </router-link>
         <router-link v-else class="main-menu" :to="{ path: '/' }">{{ menu.text }}</router-link>
         <!-- 二级菜单 -->
-        <ul
-            v-if="menu.children"
-            class="sub-menu"
-            :class="{ 'show': activeSub === index }"
-        >
-          <li
-              v-for="(sub, subIndex) in menu.children"
-              :key="subIndex"
-              @click.stop="ue5click(sub.id)"
-              :class="{'active':activeMenu == sub.path }"
-          >
-            <router-link
-                :to="sub.path"
-                @click="activeMenu = sub.path"
-            >
+        <ul v-if="menu.children" class="sub-menu" :class="{ 'show': activeSub === index }">
+          <li v-for="(sub, subIndex) in menu.children" :key="subIndex" @click.stop="ue5click(sub.id)"
+            :class="{ 'active': activeMenu == sub.path }">
+            <router-link :to="sub.path" @click="activeMenu = sub.path">
               {{ sub.text }}
             </router-link>
           </li>
@@ -97,32 +66,29 @@
     <!-- <div ref="disease_kilometers" class="chart-container" style="height: 185px;"></div> -->
     <div class="title">按行政区排名</div>
     <div class="layout_table">
-      <div
-          class="scroll-container"
-          ref="container"
-          @mouseenter="pauseScroll"
-          @mouseleave="resumeScroll"
-      >
+      <div class="scroll-container" ref="container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
         <table>
           <!-- 固定表头 -->
           <thead>
-          <tr>
-            <th v-for="(header, index) in headers" :key="index">{{ header }}</th>
-          </tr>
+            <tr>
+              <th v-for="(header, index) in headers" :key="index">{{ header }}</th>
+            </tr>
           </thead>
 
           <!-- 滚动内容 -->
           <tbody :style="{ transform: `translateY(-${offset}px)` }">
-          <!-- 渲染原始数据 -->
-          <tr v-for="(row, index) in data" :key="index">
-            <td v-for="(cell, cellIndex) in row"  :key="cellIndex" :style="cellIndex === 3 ? 'display:none' : 'text-align:center'"
-            @click="cellIndex === 1 ? xzqclick(cell,row[2],row[3]) : null" >{{ cell }}</td>
-          </tr>
+            <!-- 渲染原始数据 -->
+            <tr v-for="(row, index) in data" :key="index">
+              <td v-for="(cell, cellIndex) in row" :key="cellIndex"
+                :style="cellIndex === 3 ? 'display:none' : 'text-align:center'"
+                @click="cellIndex === 1 ? xzqclick(cell, row[2], row[3]) : null">{{ cell }}</td>
+            </tr>
 
-          <!-- 复制数据实现无缝滚动 -->
-          <tr v-for="(row, index) in data" :key="index + '_copy'">
-            <td v-for="(cell, cellIndex) in row" :key="cellIndex + '_copy'" :style="cellIndex === 3 ? 'display:none' : 'text-align:center'">{{ cell }}</td>
-          </tr>
+            <!-- 复制数据实现无缝滚动 -->
+            <tr v-for="(row, index) in data" :key="index + '_copy'">
+              <td v-for="(cell, cellIndex) in row" :key="cellIndex + '_copy'"
+                :style="cellIndex === 3 ? 'display:none' : 'text-align:center'">{{ cell }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -131,34 +97,29 @@
     <div class="title">按道路排名</div>
 
     <div class="layout_table">
-      <div
-          class="scroll-container"
-          ref="container_road"
-          @mouseenter="pauseScroll_road"
-          @mouseleave="resumeScroll_road"
-      >
+      <div class="scroll-container" ref="container_road" @mouseenter="pauseScroll_road" @mouseleave="resumeScroll_road">
         <table>
           <!-- 固定表头 -->
           <thead>
-          <tr>
-            <th v-for="(header, index) in headers_road" :key="index">{{ header }}</th>
-          </tr>
+            <tr>
+              <th v-for="(header, index) in headers_road" :key="index">{{ header }}</th>
+            </tr>
           </thead>
 
           <!-- 滚动内容 -->
           <tbody :style="{ transform: `translateY(-${offset_road}px)` }">
-          <!-- 渲染原始数据 -->
-          <tr v-for="(row, index) in data_road" :key="index">
-            <td v-for="(cell, cellIndex) in row" :key="cellIndex" style="text-align:center;"
+            <!-- 渲染原始数据 -->
+            <tr v-for="(row, index) in data_road" :key="index">
+              <td v-for="(cell, cellIndex) in row" :key="cellIndex" style="text-align:center;"
                 @click="cellIndex === 1 ? daoluclick(cell) : null">
-              {{ cellIndex == 2 ? (toRoman(cell) || 'I') : cell }}
-            </td>
-          </tr>
+                {{ cellIndex == 2 ? (toRoman(cell) || 'I') : cell }}
+              </td>
+            </tr>
 
-          <!-- 复制数据实现无缝滚动 -->
-          <tr v-for="(row, index) in data_road" :key="index + '_copy'">
-            <td v-for="(cell, cellIndex) in row" :key="cellIndex + '_copy'" style="text-align:center;">{{ cell }}</td>
-          </tr>
+            <!-- 复制数据实现无缝滚动 -->
+            <tr v-for="(row, index) in data_road" :key="index + '_copy'">
+              <td v-for="(cell, cellIndex) in row" :key="cellIndex + '_copy'" style="text-align:center;">{{ cell }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -167,7 +128,7 @@
   </div>
   <!-- ECharts 图表容器 -->
 
-  <router-view/>
+  <router-view />
 </template>
 <style>
 .header {
@@ -216,11 +177,13 @@
 .layout_table td {
   padding: 5px;
   /* border-bottom: 1px solid #e8e8e8; */
-  height: 20px; /* 需与 JS 中的 ROW_HEIGHT 一致 */
+  height: 20px;
+  /* 需与 JS 中的 ROW_HEIGHT 一致 */
 }
 
 .layout_table tbody {
-  will-change: transform; /* 优化动画性能 */
+  will-change: transform;
+  /* 优化动画性能 */
 }
 
 .toggle_box {
@@ -239,7 +202,6 @@
   right: 405px;
   bottom: 220px;
 }
-
 </style>
 
 <script>
@@ -248,7 +210,8 @@ export default {
 }
 </script>
 <script setup>
-import {inject, onMounted, onUnmounted, ref, computed, onBeforeUnmount} from 'vue'
+import VerticalSlider from '@/views/layout/VerticalSlider.vue'
+import { inject, onMounted, onUnmounted, ref, computed, onBeforeUnmount } from 'vue'
 import * as echarts from 'echarts';
 // import { getUserList,createUser } from '@/api/user'
 import {
@@ -261,11 +224,11 @@ import {
   get_road_kilometer,
   get_disease_fixed
 } from '@/api/user'
-import {useRoute} from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-import VerticalSlider from '@/views/layout/VerticalSlider.vue'
+
 
 // 修改后的嵌套菜单结构
 const links = [
@@ -274,10 +237,10 @@ const links = [
     text: '可视化病害',
     children: [
       // { text: '病害', path: '/disease',id:'11'},
-      {text: '病害列表', path: '/diseaselist', id: '12'},
-      {text: '病害追踪', path: '/diseasetrack', id: '13'},
-      {text: '塌陷列表', path: '/taxianlist', id: '18'},
-      {text: '统计图表', path: '/chart', id: '14'},
+      { text: '病害列表', path: '/diseaselist', id: '12' },
+      { text: '病害追踪', path: '/diseasetrack', id: '13' },
+      { text: '塌陷列表', path: '/taxianlist', id: '18' },
+      { text: '统计图表', path: '/chart', id: '14' },
       // { text: '空间分析', path: '/analysis',id:'15' },
     ]
   },
@@ -286,9 +249,9 @@ const links = [
     text: '一路一档',
     children: [
       // { text: '路网', path: '/roadmap',id:'21' },
-      {text: '道路列表', path: '/road_list', id: '22'},
-      {text: '病害热力图', path: '/disease_map', id: '23'},
-      {text: '积水路段', path: '/water', id: '24'},
+      { text: '道路列表', path: '/road_list', id: '22' },
+      { text: '病害热力图', path: '/disease_map', id: '23' },
+      { text: '积水路段', path: '/water', id: '24' },
     ]
   },
   // {   id:'30',
@@ -308,8 +271,8 @@ const links = [
     id: '40',
     text: '预案预演',
     children: [
-      {text: '预案', path: '/severe', id: '41'},
-      {text: '预演', path: '/yy', id: '42'},
+      { text: '预案', path: '/severe', id: '41' },
+      { text: '预演', path: '/yy', id: '42' },
     ]
   },
   {
@@ -352,8 +315,8 @@ const callParentMethod = (message) => {
   }
 }
 const ue5click = (index) => {
-  console.log('点击触发', {"code": 1, "type": "btn", "data": {"id": index}});
-  callParentMethod({"code": 1, "type": "btn", "data": {"id": index}});
+  console.log('点击触发', { "code": 1, "type": "btn", "data": { "id": index } });
+  callParentMethod({ "code": 1, "type": "btn", "data": { "id": index } });
 }
 /* 触发ue5 */
 
@@ -369,22 +332,22 @@ const toggle_box = () => {
 const daoluclick = (cell) => {
   // 方法1：URI组件编码方案（兼容性好）
   const encodedURI = encodeURIComponent(cell)
-      .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-          String.fromCharCode(parseInt(hex, 16))
-      );
-  console.log('点击了道路排名', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'daolu'}});
-  callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'daolu'}});
+    .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+      String.fromCharCode(parseInt(hex, 16))
+    );
+  console.log('点击了道路排名', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'daolu' } });
+  callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'daolu' } });
 }
 
 //点击行政区触发
-const xzqclick = (cell,num,xzq) => {
+const xzqclick = (cell, num, xzq) => {
   // 方法1：URI组件编码方案（兼容性好）
   const encodedURI = encodeURIComponent(cell)
-      .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-          String.fromCharCode(parseInt(hex, 16))
-      );
-  console.log('点击了行政区', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI),"nums":num,"code":xzq, "state": 'xzq'}});
-  callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI),"nums":num,"code":xzq, "state": 'xzq'}});
+    .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+      String.fromCharCode(parseInt(hex, 16))
+    );
+  console.log('点击了行政区', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "nums": num, "code": xzq, "state": 'xzq' } });
+  callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "nums": num, "code": xzq, "state": 'xzq' } });
 }
 // const hideSub = (index) => {
 //     activeSub.value = -1
@@ -438,7 +401,7 @@ const pauseScroll = () => {
 
 // 恢复滚动
 const resumeScroll = () => {
-  if (!isScrolling) {
+  if (!isScrolling && data.length > 5) {
     isScrolling = true;
     startScroll();
   }
@@ -488,7 +451,7 @@ const pauseScroll_road = () => {
 
 // 恢复滚动
 const resumeScroll_road = () => {
-  if (!isScrolling_road) {
+  if (!isScrolling_road && data_road.length > 5) {
     isScrolling_road = true;
     startScroll_road();
   }
@@ -549,12 +512,12 @@ const formatDateTime = () => {
 
 // 计算属性式输出
 const formattedDate = computed(() => {
-  const {year, month, day} = formatDateTime();
+  const { year, month, day } = formatDateTime();
   return `${year}年${month}月${day}日`;
 });
 
 const formattedTime = computed(() => {
-  const {hour, minute, second} = formatDateTime();
+  const { hour, minute, second } = formatDateTime();
   return `${hour}:${minute}:${second}`;
 });
 
@@ -582,18 +545,20 @@ onMounted(async () => {
   get_road_state().then(res => {
     console.log('行政区排名:', res)
     const series = res.result.sort((a, b) =>
-        b.countNums - a.countNums  // 降序核心逻辑
+      b.countNums - a.countNums  // 降序核心逻辑
     );
     console.log('1212', series)
 
-    data = Array.from({length: series.length}, (_, i) => [
+    data = Array.from({ length: series.length }, (_, i) => [
       i + 1,
       series[i]['countName'],
       series[i]['countNums'],
       series[i]['countColCode'],
     ]);
 
-    startScroll();
+    if (series.length > 5) {
+      startScroll();
+    }
   }).catch(err => {
     console.error('获取全市道路排名失败1:', err)
   });
@@ -603,18 +568,20 @@ onMounted(async () => {
   get_road_rank().then(res => {
     console.log('全市道路排名:', res)
     const series = res.result.sort((a, b) =>
-        b.countNums - a.countNums  // 降序核心逻辑
+      b.countNums - a.countNums  // 降序核心逻辑
     );
     console.log('1212', series)
 
-    data_road = Array.from({length: series.length}, (_, i) => [
+    data_road = Array.from({ length: series.length }, (_, i) => [
       i + 1,
       series[i]['countName'],
       series[i]['riskLevel'],
       series[i]['countNums'],
     ]);
 
-    startScroll_road();
+    if (series.length > 5) {
+      startScroll_road();
+    }
   }).catch(err => {
     console.error('获取全市道路排名失败1:', err)
   });
@@ -631,26 +598,43 @@ onMounted(async () => {
     //     };
     // }, []);
 
+    // 病害类型排序：空洞(红) → 脱空(橙) → 疏松体(黄)，危害由重到轻
+    const typeOrder = ['空洞', '脱空', '疏松体'];
+    const typeColorMap = {
+      '空洞': '#ff0000',
+      '脱空': '#ffc000',
+      '疏松体': '#ffff00'
+    };
     const series = res.result.reduce((acc, item) => {
       const name = item['countName'];
-      const value = parseInt(item['countNums']); // 转换为数值
+      const value = parseInt(item['countNums']);
 
       // 合并两类疏松体
       if (name === '严重疏松体' || name === '一般疏松体') {
-        // 查找是否已存在疏松体分类
         const existing = acc.find(i => i.name === '疏松体');
         if (existing) {
           existing.value += value;
         } else {
-          acc.push({name: '疏松体', value});
+          acc.push({
+            name: '疏松体',
+            value,
+            itemStyle: { color: typeColorMap['疏松体'] }
+          });
         }
       } else {
-        // 其他分类直接添加
-        acc.push({name, value});
+        acc.push({
+          name,
+          value,
+          itemStyle: { color: typeColorMap[name] || undefined }
+        });
       }
 
       return acc;
-    }, []);
+    }, []).sort((a, b) => {
+      const ai = typeOrder.indexOf(a.name);
+      const bi = typeOrder.indexOf(b.name);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    });
 
 
     console.log('病害数量总数', res.result.reduce((a, b) => a + b.countNums, 0))
@@ -661,10 +645,10 @@ onMounted(async () => {
         formatter: function (c) {
 
           return '<span style="display: inline-block;padding: 5px 0;" >' +
-              '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
-              ';}"></i> ' +
-              '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
-              '</span>';
+            '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
+            ';}"></i> ' +
+            '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
+            '</span>';
         }
       },
 
@@ -721,7 +705,7 @@ onMounted(async () => {
         //data:['B1','F1','F2']
       },
 
-      color: ['#ffff00', '#00b0f0', '#ff0000', '#ffc000',],
+      // color: ['#ffff00', '#00b0f0', '#ff0000', '#ffc000',],
       series: [
         {
           name: '',
@@ -812,11 +796,11 @@ onMounted(async () => {
     disease_type_chart.on('click', function (params) {
       // 方法1：URI组件编码方案（兼容性好）
       const encodedURI = encodeURIComponent(params.data.name)
-          .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-              String.fromCharCode(parseInt(hex, 16))
-          );
-      console.log('点击了系列', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'type'}});
-      callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'type'}});
+        .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+          String.fromCharCode(parseInt(hex, 16))
+        );
+      console.log('点击了系列', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'type' } });
+      callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'type' } });
 
     });
   }).catch(err => {
@@ -833,18 +817,31 @@ onMounted(async () => {
     // 步骤1：提取年份作为x轴数据
     const years = res.result[0].slice(1); // ['2021', '2022', '2023']
     // 步骤2：转换数据系列
-    const series = res.result.slice(1).map(item => {
+    // 趋势图排序：空洞(红) → 脱空(橙) → 严重疏松体(黄) → 一般疏松体(黄)，危害由重到轻
+    const trendOrder = ['空洞', '脱空', '严重疏松体', '一般疏松体'];
+    const trendColorMap = {
+      '空洞': '#ff0000',
+      '脱空': '#ffc000',
+      '严重疏松体': '#ffff00',
+      '一般疏松体': '#ffff00'
+    };
+    const rawSeries = res.result.slice(1).map(item => {
       return {
-        name: item[0], // 分类名称
+        name: item[0],
         type: 'line',
-        smooth: true,  // 关键参数
-        data: item.slice(1).map(Number) // 转换为数值型 [16,53,110]
+        smooth: true,
+        data: item.slice(1).map(Number),
+        lineStyle: { color: trendColorMap[item[0]] || undefined },
+        itemStyle: { color: trendColorMap[item[0]] || undefined }
       };
+    }).sort((a, b) => {
+      const ai = trendOrder.indexOf(a.name);
+      const bi = trendOrder.indexOf(b.name);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
     });
-    //步骤3：获取legend
-    const legend = res.result.slice(1).map(item => {
-      return item[0];
-    });
+    const series = rawSeries;
+    //步骤3：获取legend（保持与series一致的排序）
+    const legend = series.map(item => item.name);
 
     var disease_trends_chart = echarts.init(disease_trends.value);
     const disease_trends_option = {
@@ -863,7 +860,7 @@ onMounted(async () => {
       legend: {
         // data: ['故障', '隐患', '安全事件'],
         data: legend,
-        textStyle: {color: '#fff'}, // 图例文字颜色
+        textStyle: { color: '#fff' }, // 图例文字颜色
       },
       // toolbox: {
       //     feature: {
@@ -1003,16 +1000,16 @@ onMounted(async () => {
 
     //点击触发事件
     disease_trends_chart.on('click', function (params) {
-      console.log('params  点击',params)
+      console.log('params  点击', params)
 
       // 方法1：URI组件编码方案（兼容性好）
       const encodedURI = encodeURIComponent(params.seriesName)
-          .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-              String.fromCharCode(parseInt(hex, 16))
-          );
-        
-      console.log('点击了系列', {"code": 1, "type": "poi", "data": {"id": params.name,"name":btoa(encodedURI), "state": 'qushi'}});
-      callParentMethod({"code": 1, "type": "poi", "data": {"id": params.name,"name":btoa(encodedURI), "state": 'qushi'}});
+        .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+          String.fromCharCode(parseInt(hex, 16))
+        );
+
+      console.log('点击了系列', { "code": 1, "type": "poi", "data": { "id": params.name, "name": btoa(encodedURI), "state": 'qushi' } });
+      callParentMethod({ "code": 1, "type": "poi", "data": { "id": params.name, "name": btoa(encodedURI), "state": 'qushi' } });
 
     });
 
@@ -1041,10 +1038,10 @@ onMounted(async () => {
         trigger: 'item',
         formatter: function (c) {
           return '<span style="display: inline-block;padding: 5px 0;" >' +
-              '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
-              ';}"></i> ' +
-              '<span style="margin-right:5px;">' + c.name + '</span>' + c.value + '' +
-              '</span>';
+            '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
+            ';}"></i> ' +
+            '<span style="margin-right:5px;">' + c.name + '</span>' + c.value + '' +
+            '</span>';
         }
       },
       color: ["#f1cd43", "#13ff43", "#c88342", "#4ffdc2", "#ff5a2d", "#ffb52c", "#287bfd", "#17ffff", "#04c971"],
@@ -1163,11 +1160,11 @@ onMounted(async () => {
     disease_cause_chart.on('click', function (params) {
       // 方法1：URI组件编码方案（兼容性好）
       const encodedURI = encodeURIComponent(params.data.name)
-          .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-              String.fromCharCode(parseInt(hex, 16))
-          );
-      console.log('点击了系列', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'disasterWhy'}});
-      callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'disasterWhy'}});
+        .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+          String.fromCharCode(parseInt(hex, 16))
+        );
+      console.log('点击了系列', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'disasterWhy' } });
+      callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'disasterWhy' } });
     });
   }).catch(err => {
     console.error('请求失败1:', err)
@@ -1194,18 +1191,34 @@ onMounted(async () => {
     //         value: item['countNums'] // 转换为数值型 [16,53,110]
     //     };
     // });
-    console.log('tetste',res.result);
+    console.log('tetste', res.result);
+    // 病害等级排序：Ⅴ → Ⅳ → Ⅲ → Ⅱ → Ⅰ，危害由重到轻
+    const riskLevelMap = {
+      'V级': 5, 'Ⅴ级': 5, 'V': 5, 'Ⅴ': 5,
+      'IV级': 4, 'Ⅳ级': 4, 'IV': 4, 'Ⅳ': 4,
+      'III级': 3, 'Ⅲ级': 3, 'III': 3, 'Ⅲ': 3,
+      'II级': 2, 'Ⅱ级': 2, 'II': 2, 'Ⅱ': 2,
+      'I级': 1, 'Ⅰ级': 1, 'I': 1, 'Ⅰ': 1,
+    };
+    const riskColorMap = {
+      4: '#ff0000',   // IV: 红
+      3: '#ffc000',   // III: 橙
+      2: '#ffff00',   // II: 黄
+      1: '#00b0f0'    // I: 蓝
+    };
     const series = res.result
-    .filter(item => item['countName'])
-    .map(item => ({
-
-      name: item['countName'], // 分类名称
-      value: item['countNums'] // 转换为数值型 [16,53,110]
-
-    })).sort((a, b) => {
-      const order = ['I级', 'II级', 'III级', 'IV级'];
-      return order.indexOf(a.name) - order.indexOf(b.name);
-    });
+      .filter(item => item['countName'])
+      .map(item => {
+        const name = item['countName'];
+        const lvl = riskLevelMap[name] || 0;
+        return {
+          name: name,
+          value: item['countNums'],
+          itemStyle: { color: riskColorMap[lvl] || undefined },
+          _lvl: lvl // temporary strictly for sorting
+        };
+      })
+      .sort((a, b) => b._lvl - a._lvl);
     console.log('病害风险等级abc:', series)
     console.log('病害风险等级总数', res.result.reduce((a, b) => a + b.countNums, 0))
     var disease_risk_chart = echarts.init(disease_risk.value);
@@ -1215,10 +1228,10 @@ onMounted(async () => {
         formatter: function (c) {
 
           return '<span style="display: inline-block;padding: 5px 0;" >' +
-              '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
-              ';}"></i> ' +
-              '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
-              '</span>';
+            '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
+            ';}"></i> ' +
+            '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
+            '</span>';
         }
       },
 
@@ -1276,7 +1289,8 @@ onMounted(async () => {
         //data:['B1','F1','F2']
       },
 
-      color: ['#00b0f0', '#ffff00','#ffc000','#ff0000'],
+      // 颜色对应排序：IV(红) → III(橙) → II(黄) → I(蓝)
+      color: ['#ff0000', '#ffc000', '#ffff00', '#00b0f0'],
       series: [
         {
           name: '',
@@ -1381,11 +1395,11 @@ onMounted(async () => {
 
       // 方法1：URI组件编码方案（兼容性好）
       const encodedURI = encodeURIComponent(params.data.name)
-          .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-              String.fromCharCode(parseInt(hex, 16))
-          );
-      console.log('点击了系列', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'level'}});
-      callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'level'}});
+        .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+          String.fromCharCode(parseInt(hex, 16))
+        );
+      console.log('点击了系列', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'level' } });
+      callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'level' } });
     });
 
   }).catch(err => {
@@ -1398,25 +1412,25 @@ onMounted(async () => {
 
   //病害治理情况
   get_disease_fixed().then(res => {
-      const series = res.result.map(item => ({
+    const series = res.result.map(item => ({
 
       name: item['countName'], // 分类名称
       value: item['countNums'] // 转换为数值型 [16,53,110]
 
     }));
-      console.log('dfdsfsdaf',series);
+    console.log('dfdsfsdaf', series);
 
-      var disease_fixed_chart = echarts.init(disease_fixed.value);
+    var disease_fixed_chart = echarts.init(disease_fixed.value);
     const disease_fixed_option = {
       tooltip: {
         trigger: 'item',
         formatter: function (c) {
 
           return '<span style="display: inline-block;padding: 5px 0;" >' +
-              '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
-              ';}"></i> ' +
-              '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
-              '</span>';
+            '<i style="display: inline-block;border-radius:50%;width: 10px;height: 10px;background: ' + c.color +
+            ';}"></i> ' +
+            '<span style="margin-right:5px;">' + c.name + '</span>' + c.percent + '%' +
+            '</span>';
         }
       },
 
@@ -1564,16 +1578,16 @@ onMounted(async () => {
 
     //点击触发事件
     disease_fixed_chart.on('click', function (params) {
-      
+
       // 方法1：URI组件编码方案（兼容性好）
       const encodedURI = encodeURIComponent(params.data.name)
-          .replace(/%([0-9A-F]{2})/g, (_, hex) =>
-              String.fromCharCode(parseInt(hex, 16))
-          );
-      console.log('点击了系列', {"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'status'}});
-      callParentMethod({"code": 1, "type": "poi", "data": {"id": btoa(encodedURI), "state": 'status'}});
+        .replace(/%([0-9A-F]{2})/g, (_, hex) =>
+          String.fromCharCode(parseInt(hex, 16))
+        );
+      console.log('点击了系列', { "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'status' } });
+      callParentMethod({ "code": 1, "type": "poi", "data": { "id": btoa(encodedURI), "state": 'status' } });
     });
-  
+
   }).catch(err => {
     console.error('治理情况error:', err)
   });
@@ -1657,16 +1671,16 @@ onMounted(async () => {
           areaStyle: {
             normal: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0, color: 'rgba(177,222,255,0.5)' // 0% 处的颜色  rgba(235,140,29,0.5)
-                    },
-                    {
-                      offset: 0.8, color: 'rgba(177,222,255,0.1) ' // 100% 处的颜色
-                    },
-                    {
-                      offset: 1, color: 'rgba(177,222,255,0) ' // 100% 处的颜色
-                    }
-                  ]
+                {
+                  offset: 0, color: 'rgba(177,222,255,0.5)' // 0% 处的颜色  rgba(235,140,29,0.5)
+                },
+                {
+                  offset: 0.8, color: 'rgba(177,222,255,0.1) ' // 100% 处的颜色
+                },
+                {
+                  offset: 1, color: 'rgba(177,222,255,0) ' // 100% 处的颜色
+                }
+              ]
               ),  //背景渐变色
             },
           },

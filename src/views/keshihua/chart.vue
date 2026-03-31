@@ -78,26 +78,43 @@ onMounted(async () => {
     //         value: item['countNums'] // 转换为数值型 [16,53,110]
     //     };
     // });
+    // 病害类型排序：空洞(红) → 脱空(橙) → 疏松体(黄)，危害由重到轻
+    const typeOrder = ['空洞', '脱空', '疏松体'];
+    const typeColorMap = {
+      '空洞': '#ff0000',
+      '脱空': '#ffc000',
+      '疏松体': '#ffff00'
+    };
     const series = res.result.reduce((acc, item) => {
       const name = item['countName'];
-      const value = parseInt(item['countNums']); // 转换为数值
+      const value = parseInt(item['countNums']);
 
       // 合并两类疏松体
       if (name === '严重疏松体' || name === '一般疏松体') {
-        // 查找是否已存在疏松体分类
         const existing = acc.find(i => i.name === '疏松体');
         if (existing) {
           existing.value += value;
         } else {
-          acc.push({name: '疏松体', value});
+          acc.push({
+            name: '疏松体',
+            value,
+            itemStyle: { color: typeColorMap['疏松体'] }
+          });
         }
       } else {
-        // 其他分类直接添加
-        acc.push({name, value});
+        acc.push({
+          name,
+          value,
+          itemStyle: { color: typeColorMap[name] || undefined }
+        });
       }
 
       return acc;
-    }, []);
+    }, []).sort((a, b) => {
+      const ai = typeOrder.indexOf(a.name);
+      const bi = typeOrder.indexOf(b.name);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    });
     console.log('病害数量总数', res.result.reduce((a, b) => a + b.countNums, 0))
     var disease_type_chart = echarts.init(disease_type.value);
     const disease_type_option = {
@@ -271,18 +288,31 @@ onMounted(async () => {
     // 步骤1：提取年份作为x轴数据
     const years = res.result[0].slice(1); // ['2021', '2022', '2023']
     // 步骤2：转换数据系列
-    const series = res.result.slice(1).map(item => {
+    // 趋势图排序：空洞(红) → 脱空(橙) → 严重疏松体(黄) → 一般疏松体(黄)，危害由重到轻
+    const trendOrder = ['空洞', '脱空', '严重疏松体', '一般疏松体'];
+    const trendColorMap = {
+      '空洞': '#ff0000',
+      '脱空': '#ffc000',
+      '严重疏松体': '#ffff00',
+      '一般疏松体': '#ffff00'
+    };
+    const rawSeries = res.result.slice(1).map(item => {
       return {
-        name: item[0], // 分类名称
+        name: item[0],
         type: 'line',
-        smooth: true,  // 关键参数
-        data: item.slice(1).map(Number) // 转换为数值型 [16,53,110]
+        smooth: true,
+        data: item.slice(1).map(Number),
+        lineStyle: { color: trendColorMap[item[0]] || undefined },
+        itemStyle: { color: trendColorMap[item[0]] || undefined }
       };
+    }).sort((a, b) => {
+      const ai = trendOrder.indexOf(a.name);
+      const bi = trendOrder.indexOf(b.name);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
     });
-    //步骤3：获取legend
-    const legend = res.result.slice(1).map(item => {
-      return item[0];
-    });
+    const series = rawSeries;
+    //步骤3：获取legend（保持与series一致的排序）
+    const legend = series.map(item => item.name);
 
     var disease_trends_chart = echarts.init(disease_trends.value);
     const disease_trends_option = {
@@ -616,15 +646,33 @@ onMounted(async () => {
     //         value: item['countNums'] // 转换为数值型 [16,53,110]
     //     };
     // });
-    const series = res.result.map(item => ({
-
-      name: item['countName'], // 分类名称
-      value: item['countNums'] // 转换为数值型 [16,53,110]
-
-    })).sort((a, b) => {
-      const order = ['I级', 'II级', 'III级', 'IV级'];
-      return order.indexOf(a.name) - order.indexOf(b.name);
-    });
+    // 病害等级排序：Ⅴ → Ⅳ → Ⅲ → Ⅱ → Ⅰ，危害由重到轻
+    const riskLevelMap = {
+      'V级': 5, 'Ⅴ级': 5, 'V': 5, 'Ⅴ': 5,
+      'IV级': 4, 'Ⅳ级': 4, 'IV': 4, 'Ⅳ': 4,
+      'III级': 3, 'Ⅲ级': 3, 'III': 3, 'Ⅲ': 3,
+      'II级': 2, 'Ⅱ级': 2, 'II': 2, 'Ⅱ': 2,
+      'I级': 1, 'Ⅰ级': 1, 'I': 1, 'Ⅰ': 1,
+    };
+    const riskColorMap = {
+      4: '#ff0000',   // IV: 红
+      3: '#ffc000',   // III: 橙
+      2: '#ffff00',   // II: 黄
+      1: '#00b0f0'    // I: 蓝
+    };
+    const series = res.result
+      .filter(item => item['countName'])
+      .map(item => {
+        const name = item['countName'];
+        const lvl = riskLevelMap[name] || 0;
+        return {
+          name: name,
+          value: item['countNums'],
+          itemStyle: { color: riskColorMap[lvl] || undefined },
+          _lvl: lvl // temporary strictly for sorting
+        };
+      })
+      .sort((a, b) => b._lvl - a._lvl);
     console.log('病害风险等级:', series)
     console.log('病害风险等级总数', res.result.reduce((a, b) => a + b.countNums, 0))
     var disease_risk_chart = echarts.init(disease_risk.value);
@@ -700,7 +748,8 @@ onMounted(async () => {
         //data:['B1','F1','F2']
       },
 
-      color: ['#00b0f0', '#ffff00', '#ffc000', '#ff0000'],
+      // 颜色对应排序：IV(红) → III(橙) → II(黄) → I(蓝)
+      color: ['#ff0000', '#ffc000', '#ffff00', '#00b0f0'],
       series: [
         {
           name: '',
