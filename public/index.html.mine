@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <style type="text/css">
+    .chataibox {
+      position: fixed;
+      width: 960px;
+      height: 595px;
+      z-index: 32;
+      background: url('@/assets/window_bg.png') no-repeat 0 0;
+      background-size: 100% 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <!-- <title><%= htmlWebpackPlugin.options.title %></title> -->
+  <title>成都市道路塌陷隐患检测预警平台</title>
+  <script type="text/javascript "
+    src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=UIB3VQ9A2y18XTNYzVN5kNGKfp8wGeW0&callback"></script>
+  <script src="./ezuikit.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <div class="chataibox" id="aidiv" style=" display: none">
+  </div>
+  <!-- built files will be auto injected -->
+
+</body>
+<script src="webRtcPlayer.js"></script>
+
+<script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.14/libs/cn/index.js"></script>
+<script>
+  window.cozeclient = new CozeWebSDK.WebChatClient({
+    /**
+     * Agent or app settings
+     * for agent
+     * @param config.bot_id - Agent ID.
+     * for app
+     * @param config.type - To integrate a Coze app, you must set the value to app.
+     * @param config.isIframe - Whether to use the iframe method to open the chat box
+     * @param config.appInfo.appId - AI app ID.
+     * @param config.appInfo.workflowId - Workflow or chatflow ID.
+     */
+    config: {
+      type: 'bot',
+      bot_id: '7520749645488979983',
+      isIframe: false,
+    },
+    /**
+     * The auth property is used to configure the authentication method.
+     * @param type - Authentication method, default type is 'unauth', which means no authentication is required; it is recommended to set it to 'token', which means authentication is done through PAT (Personal Access Token) or OAuth.
+     * @param token - When the type is set to 'token', you need to configure the PAT (Personal Access Token) or OAuth access key.
+     * @param onRefreshToken - When the access key expires, a new key can be set as needed.
+     */
+    auth: {
+      type: 'token',
+      token: 'pat_MJpCALnqerHDPqme028AvbexE6OwjZPKHDmZxWCYbGMex27iGlvD8BAnkOz6ARj8',
+      onRefreshToken: async () => 'pat_MJpCALnqerHDPqme028AvbexE6OwjZPKHDmZxWCYbGMex27iGlvD8BAnkOz6ARj8'
+    },
+    /**
+     * The userInfo parameter is used to set the display of agent user information in the chat box.
+     * @param userInfo.id - ID of the agent user.
+     * @param userInfo.url - URL address of the user's avatar.
+     * @param userInfo.nickname - Nickname of the agent user.
+     */
+    userInfo: {
+      id: 'user',
+      url: 'https://www.roadradar.cn/xcxstatic/zkyt.png',
+      nickname: '我',
+    },
+    ui: {
+      /**
+       * The ui.base parameter is used to add the overall UI effect of the chat window.
+       * @param base.icon - Application icon URL.
+       * @param base.layout - Layout style of the agent chat box window, which can be set as 'pc' or'mobile'.
+       * @param base.lang - System language of the agent, which can be set as 'en' or 'zh-CN'.
+       * @param base.zIndex - The z-index of the chat box.
+       */
+      base: {
+        icon: 'https://www.roadradar.cn/xcxstatic/znt2.png',
+        layout: 'pc',
+        lang: 'en',
+        zIndex: 1000
+      },
+      /**
+       * Controls whether to display the top title bar and the close button
+       * @param header.isShow - Whether to display the top title bar.
+       * @param header.isNeedClose - Whether to display the close button.
+       */
+      header: {
+        isShow: true,
+        isNeedClose: true,
+      },
+      /**
+       * Controls whether to display the floating ball at the bottom right corner of the page.
+       */
+      asstBtn: {
+        isNeed: false
+      },
+      /**
+       * The ui.footer parameter is used to add the footer of the chat window.
+       * @param footer.isShow - Whether to display the bottom copy module.
+       * @param footer.expressionText - The text information displayed at the bottom.
+       * @param footer.linkvars - The link copy and link address in the footer.
+       */
+      footer: {
+        isShow: true,
+        expressionText: 'Powered By 中科云图，内容均由 DeepSeek 生成',
+      },
+      /**
+       * Control the UI and basic capabilities of the chat box.
+       * @param chatBot.title - The title of the chatbox
+       * @param chatBot.uploadable - Whether file uploading is supported.
+       * @param chatBot.width - The width of the agent window on PC is measured in px, default is 460.
+       * @param chatBot.el - Container for setting the placement of the chat box (Element).
+       */
+      chatBot: {
+        el: document.getElementById("aidiv"),
+        onHide: () => {
+          document.getElementById('aidiv').style.display = 'none';
+        },
+        title: '中科云图智能体',
+        uploadable: false,
+        width: 960,
+        isNeedAudio: true,
+        isNeedFunctionCallMessage: true,
+      },
+    },
+  });
+
+
+</script>
+
+</html>

@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import a1 from '@/assets/gxjc2.png';
+import a1 from '@/assets/gxjc.png';
 //轮播图
 const banner = ref(a1);
 </script>

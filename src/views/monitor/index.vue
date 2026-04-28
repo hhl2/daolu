@@ -5,23 +5,23 @@
       <div class="tc_left">监控指挥</div>
       <div class="tc_right">
         <el-icon @click="goToHome">
-          <CloseBold/>
+          <CloseBold />
         </el-icon>
       </div>
     </div>
     <div class="road_tab">
-      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" >
+      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="车辆监控" name="first">
-          <MonitorJk/>
+          <MonitorJk />
         </el-tab-pane>
-        <el-tab-pane disabled label="城市监控" name="second">
-          <MonitorCity/>
+        <el-tab-pane label="城市监控" name="second">
+          <MonitorCity />
         </el-tab-pane>
-        <el-tab-pane disabled label="数据回溯" name="third">
-          <MonitorHs/>
+        <el-tab-pane label="数据回溯" name="third">
+          <MonitorHs />
         </el-tab-pane>
-        <el-tab-pane disabled label="实时巡检" name="four">
-          <MonitorXj/>
+        <el-tab-pane label="实时巡检" name="four">
+          <MonitorXj />
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -29,7 +29,7 @@
   </div>
 </template>
 <style>
-.demo-tabs > .el-tabs__content {
+.demo-tabs>.el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;
@@ -38,7 +38,8 @@
 
 /* 强制禁用状态的选项卡文字变灰 */
 .road_tab .el-tabs__item.is-disabled {
-  color: #a8abb2 !important; /* 置灰的颜色 */
+  color: #a8abb2 !important;
+  /* 置灰的颜色 */
   cursor: not-allowed !important;
 }
 </style>
@@ -67,13 +68,13 @@ export default {
 
 <script setup>
 
-import {inject, ref} from 'vue'
+import { inject, ref } from 'vue'
 import MonitorJk from '@/components/MonitorJk.vue'
 import MonitorHs from '@/components/MonitorHs.vue'
 import MonitorXj from '@/components/MonitorXj.vue'
 import MonitorCity from '@/components/MonitorCity.vue'
 
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const goToHome = () => {
@@ -92,8 +93,8 @@ const jiankongclick = (item) => {
   // );
 
   // btoa(encodedURI)
-  console.log('点击城市监控/数据回溯触发ue', {"code": 1, "type": 'poi', "data": {"id": item}});
-  playerMethods.sendMessage({"code": 1, "type": 'poi', "data": {"id": item}})
+  console.log('点击城市监控/数据回溯触发ue', { "code": 1, "type": 'poi', "data": { "id": item } });
+  playerMethods.sendMessage({ "code": 1, "type": 'poi', "data": { "id": item } })
 }
 
 //选项卡
@@ -121,5 +122,3 @@ const handleClick = (tab) => {
 }
 
 </script>
-
-
